@@ -9,6 +9,7 @@ import StackNavigator from "./StackNavigator";
 
 //telas
 import Profile from "../screens/Profile";
+import Logout from "../screens/Logout";
 
 const Drawer = createDrawerNavigator()
 
@@ -17,6 +18,7 @@ const DrawerNavigator = ()=>{
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={StackNavigator}/>
       <Drawer.Screen name="Perfil" component={Profile}/>
+      <Drawer.Screen name="Logout" component={Logout}/>
     </Drawer.Navigator>
   )
 }
