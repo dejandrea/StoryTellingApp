@@ -12,7 +12,7 @@ import {
   Dimensions
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import DropDownPicker from "react-native-dropdown-picker";
+import DropDownPicker from 'react-native-dropdown-picker'
 
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
@@ -81,11 +81,8 @@ export default class CreateStory extends Component {
                     { label: "Image 5", value: "image_5" }
                   ]}
                   defaultValue={this.state.previewImage}
-                  containerStyle={{
-                    height: 40,
-                    borderRadius: 20,
-                    marginBottom: 10
-                  }}
+                  open={this.state.dropdownHeight == 170 ? true : false}
+                 
                   onOpen={() => {
                     this.setState({ dropdownHeight: 170 });
                   }}
@@ -105,9 +102,9 @@ export default class CreateStory extends Component {
                     color: "white",
                     fontFamily: "Bubblegum-Sans"
                   }}
-                  onChangeItem={item =>
+                  onSelectItem={(item) =>
                     this.setState({
-                      previewImage: item.value
+                      previewImage: item.value,
                     })
                   }
                 />
