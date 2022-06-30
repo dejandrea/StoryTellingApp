@@ -30,3 +30,9 @@ yarn add react-native-dropdown-picker
 
 yarn add @react-navigation/stack
 expo install expo-speech
+
+### Aula 85
+
+yarn add firebase@^8.2.10
+yarn add react-navigation
+expo install expo-google-app-auth
