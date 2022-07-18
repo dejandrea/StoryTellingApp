@@ -7,9 +7,10 @@ import {
   Platform,
   StatusBar,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Google from "expo-google-app-auth";
 //import * as Google from 'expo-auth-session/providers/google';
 import firebase from "firebase";
@@ -109,8 +110,8 @@ export default class LoginScreen extends Component {
       const result = await Google.logInAsync({
         behaviour: "web",
         androidClientId:"387188696939-jhasdrvf80tapqea5u1654780hlrjk1e.apps.googleusercontent.com",
-        // iosClientId:"387188696939-29crthna78l6m35ejm30chci3mkc0iqr.apps.googleusercontent.com",
-        // webClientId:"387188696939-ga5hk8jah44p6ionjrhnniukbsi0rhiq.apps.googleusercontent.com",
+        iosClientId:"387188696939-29crthna78l6m35ejm30chci3mkc0iqr.apps.googleusercontent.com",
+        webClientId:"387188696939-ga5hk8jah44p6ionjrhnniukbsi0rhiq.apps.googleusercontent.com",
         scopes: ["profile", "email"]
       });
 
