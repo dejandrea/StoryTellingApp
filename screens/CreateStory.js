@@ -9,7 +9,9 @@ import {
   Image,
   ScrollView,
   TextInput,
-  Dimensions
+  Dimensions,
+  Alert,
+  Button
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -30,6 +32,7 @@ export default class CreateStory extends Component {
       previewImage: "image_1",
       dropdownHeight: 60,
       light_theme: true,
+
     };
   }
 
@@ -53,6 +56,40 @@ export default class CreateStory extends Component {
         this.setState({ light_theme: theme === "light" });
       });
   };
+
+  async addStory(){
+    if (this.state.title && this.state.description && this.state.story && this.state.moral) {
+      let storyData = {
+        preview_image: this.state.previewImage,
+        title:this.state.title,
+        description: this.state.description,
+        story:this.state.story,
+        moral:this.state.moral,
+        author:firebase.auth().currentUser.displayName,
+        created_on:new Date(),
+        author_uid:firebase.auth().currentUser.uid,
+        likes:0
+      }
+      await firebase
+        .database()
+        .ref("/posts/"+(Math.random().toString(36).slice(2)))
+        .set(storyData)
+        .then(function(snapshot){
+
+        })
+        this.props.setUpdateToTrue();
+        this.props.navigation.navigate("Feed");
+    }else{
+      Alert.alert(
+        'Error',
+        'Todos os campos são obrigatórios',
+        [
+          {text:"OK",onPress:()=>console.log('Ok Pressionado')}
+        ],
+        {cancelable:false}
+      )
+    }
+  }
 
   render() {
     if (!this.state.fontsLoaded) {
@@ -191,6 +228,13 @@ export default class CreateStory extends Component {
                 />
 
               </View>
+              <View style={styles.submitButton}>
+                <Button 
+                  onPress={()=>{this.addStory()}}
+                  title="Submit"
+                  color="#841584"
+                />
+              </View>
 
             </ScrollView>
           </View>
@@ -284,5 +328,10 @@ const styles = StyleSheet.create({
   inputTextBig: {
     textAlignVertical: "top",
     padding: RFValue(5)
+  },
+  submitButton:{
+    marginTop: RFValue(20),
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

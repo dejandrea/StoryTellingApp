@@ -7,7 +7,8 @@ import {
   StatusBar,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -24,7 +25,9 @@ export default class StoryCard extends Component {
     super(props);
     this.state = {
       fontsLoaded: false,
-      light_theme: true
+      light_theme: true,
+      stoty_id:this.props.story.key,
+      story_data:this.props.story.value
     };
   }
 
@@ -50,23 +53,32 @@ export default class StoryCard extends Component {
   };
 
   render() {
+    let story = this.state.story_data
     if (!this.state.fontsLoaded) {
       return <AppLoading />;
     } else {
+      let images = {
+        "image_1": require("../assets/story_image_1.png"),
+        "image_2": require("../assets/story_image_2.png"),
+        "image_3": require("../assets/story_image_3.png"),
+        "image_4": require("../assets/story_image_4.png"),
+        "image_5": require("../assets/story_image_5.png")
+      };
       return (
         <TouchableOpacity
           style={styles.container}
           onPress={() =>
             this.props.navigation.navigate("StoryScreen", {
-              story: this.props.story
+              story: this.state.story_data
             })
           }
         >
+          <SafeAreaView style={styles.droidSafeArea} />
           <View style={this.state.light_theme
                 ? styles.cardContainerLight
                 : styles.cardContainer}>
             <Image
-              source={require("../assets/story_image_1.png")}
+              source={images[story.preview_image]}
               style={styles.storyImage}
             ></Image>
 
@@ -74,17 +86,17 @@ export default class StoryCard extends Component {
               <Text style={this.state.light_theme
                     ? styles.storyTitleTextLight
                     : styles.storyTitleText}>
-                {this.props.story.title}
+                {story.title}
               </Text>
               <Text style={this.state.light_theme
                     ? styles.storyAuthorTextLight
                     : styles.storyAuthorText}>
-                {this.props.story.author}
+                {story.author}
               </Text>
               <Text style={this.state.light_theme
                     ? styles.descriptionTextLight
                     : styles.descriptionText}>
-                {this.props.story.description}
+                {story.description}
               </Text>
             </View>
             <View style={styles.actionContainer}>
@@ -92,7 +104,7 @@ export default class StoryCard extends Component {
                 <Ionicons name={"heart"} size={RFValue(30)} color={this.state.light_theme ? "black" : "white"} />
                 <Text style={this.state.light_theme
                       ? styles.likeTextLight
-                      : styles.likeText}>12k</Text>
+                      : styles.likeText}>{story.likes}</Text>
               </View>
             </View>
           </View>

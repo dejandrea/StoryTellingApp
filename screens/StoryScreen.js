@@ -30,7 +30,7 @@ export default class StoryScreen extends Component {
       fontsLoaded: false,
       speakerColor: "gray",
       speakerIcon: "volume-high-outline",
-      light_theme: true
+      light_theme: true,
     };
   }
 
@@ -72,11 +72,19 @@ export default class StoryScreen extends Component {
   }
 
   render() {
+    //let story = this.state.story
     if (!this.props.route.params) {
       this.props.navigation.navigate("Home");
     } else if (!this.state.fontsLoaded) {
       return <AppLoading />;
     } else {
+      let images = {
+        "image_1": require("../assets/story_image_1.png"),
+        "image_2": require("../assets/story_image_2.png"),
+        "image_3": require("../assets/story_image_3.png"),
+        "image_4": require("../assets/story_image_4.png"),
+        "image_5": require("../assets/story_image_5.png")
+      };
       return (
         <View style={this.state.light_theme ? styles.containerLight : styles.container}>
           <SafeAreaView style={styles.droidSafeArea} />
@@ -98,7 +106,7 @@ export default class StoryScreen extends Component {
                   ? styles.storyCardLight
                   : styles.storyCard}>
               <Image
-                source={require("../assets/story_image_1.png")}
+                source={images[this.props.route.params.story.preview_image]}
                 style={styles.image}
               ></Image>
 
@@ -157,7 +165,7 @@ export default class StoryScreen extends Component {
                   <Ionicons name={"heart"} size={RFValue(30)} color={this.state.light_theme ? "black" : "white"} />
                   <Text style={this.state.light_theme
                         ? styles.likeTextLight
-                        : styles.likeText}>12k</Text>
+                        : styles.likeText}>{this.props.route.params.story.likes}</Text>
                 </View>
               </View>
             </ScrollView>
