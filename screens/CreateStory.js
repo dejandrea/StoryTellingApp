@@ -11,7 +11,8 @@ import {
   TextInput,
   Dimensions,
   Alert,
-  Button
+  Button,
+  TouchableOpacity
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import DropDownPicker from 'react-native-dropdown-picker'
