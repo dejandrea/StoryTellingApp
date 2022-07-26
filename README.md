@@ -36,3 +36,24 @@ expo install expo-speech
 yarn add firebase@^8.2.10
 yarn add react-navigation
 expo install expo-google-app-auth
+
+******************************************************************************
+Erro de APIkey:
+
+Before:
+export const firebaseConfig = { apiKey: "", etc etc };
+
+After:
+export default firebaseConfig = { apiKey: "", etc etc };
+
+import {firebaseConfig} from './src/config/FirebaseConfig'; ===== Wrong Order
+import FirebaseConfig from './src/config/FirebaseConfig'; ===== Correct Order
+*******************************************************************************
+
+### Aula 86
+
+
+### Aula 87
+
+
+### Aula 89
