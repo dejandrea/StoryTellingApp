@@ -33,9 +33,13 @@ expo install expo-speech
 
 ### Aula 85
 
+SDK 44
 yarn add firebase@^8.2.10
 yarn add react-navigation
-expo install expo-google-app-auth
+yarn add expo-google-app-auth@^8.3.0
+yarn add expo-app-auth
+
+yarn add @babel/preset-typescript
 
 ******************************************************************************
 Erro de APIkey:
